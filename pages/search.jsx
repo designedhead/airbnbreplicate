@@ -5,7 +5,7 @@ import ListingTile from "../src/components/search/listing";
 import { sanityClient, urlFor } from "../sanity.js";
 
 const search = (props) => {
-  console.log("props", props);
+  // console.log("props", props);
   return (
     <div>
       <div className="blackbg">
@@ -49,8 +49,7 @@ export const getServerSideProps = async () => {
   rating,
   numberOfReviews,
   }`;
-  const querytwo = 
-  'count(*[_type == "listing"])';
+  const querytwo = 'count(*[_type == "listing"])';
 
   const listings = await sanityClient.fetch(query);
   const count = await sanityClient.fetch(querytwo);

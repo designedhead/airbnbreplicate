@@ -24,7 +24,7 @@ export default function Header() {
         setNavbar(false);
       }
     };
-    document.addEventListener("scroll", changeBackground);
+    // document.addEventListener("scroll", changeBackground);
 
     return () => {
       // Cleanup the event listener

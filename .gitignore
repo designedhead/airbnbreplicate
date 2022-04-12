@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 
+/airbnb/mode_modules
 
 # testing
 /coverage

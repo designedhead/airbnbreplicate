@@ -40,10 +40,9 @@ const ListingTile = ({
         <Swiper pagination={true} modules={[Pagination]} className="swiper">
           {urls.length !== 0 &&
             urls.map((image, i) => (
-              <SwiperSlide className="swiper-slide">
+              <SwiperSlide className="swiper-slide" key={i}>
                 <Image
                   classname="image-border"
-                  key={i}
                   src={image}
                   layout="fill"
                   objectFit="cover"

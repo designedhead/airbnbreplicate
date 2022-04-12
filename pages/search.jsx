@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { differenceInDays, format, parseISO } from "date-fns";
 
 
-const search = (props) => {
+const Search = (props) => {
   const router = useRouter();
   const { location, startDate, endDate, guestsNumber } = router.query;
 
@@ -55,7 +55,7 @@ const search = (props) => {
   );
 };
 
-export default search;
+export default Search;
 
 export const getServerSideProps = async () => {
   // const query = `*[_type == "listing" && name match "Monteiro"]{

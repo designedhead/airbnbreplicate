@@ -12,8 +12,9 @@ import {
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
+import { useRouter } from "next/router";
 
-export default function Header() {
+export default function Header({ placeholder }) {
   const [navbar, setNavbar] = useState(false);
 
   useEffect(() => {
@@ -35,6 +36,8 @@ export default function Header() {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [guestsNumber, setGuestsNumber] = useState(1);
+  const router = useRouter();
 
   const handleSelect = (ranges) => {
     setStartDate(ranges.selection.startDate);
@@ -43,6 +46,18 @@ export default function Header() {
 
   const resetInput = () => {
     setSearchInput("");
+  };
+
+  const search = () => {
+    router.push({
+      pathname: "/search",
+      query: {
+        location: searchInput,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        guestsNumber: guestsNumber,
+      },
+    });
   };
 
   const selectionRange = {
@@ -55,14 +70,16 @@ export default function Header() {
     <header id="header">
       {(navbar === false && (
         <div className="header">
-          <Image src={Logo} objectFit="contain" height={80} width={90} />
+          <div onClick={() => router.push("/")}>
+            <Image src={Logo} objectFit="contain" height={80} width={90} />
+          </div>
           <div className="search__input_basic" id="bar">
             <input
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               name="search"
               id="search"
-              placeholder="Start your search..."
+              placeholder={placeholder || "Start your search..."}
               autoComplete="off"
             />
             <div className="searchbt">
@@ -81,7 +98,9 @@ export default function Header() {
       )) || (
         <div className="header__active__container animate__animated animate__slideInDown">
           <div className="header__active">
-            <Image src={LogoRed} objectFit="contain" height={80} width={90} />
+            <div onClick={() => router.push("/")}>
+              <Image src={LogoRed} objectFit="contain" height={80} width={90} />{" "}
+            </div>
             <div className="search__input" id="bar">
               <input
                 value={searchInput}
@@ -117,14 +136,22 @@ export default function Header() {
                   <p>Number of Guests</p>
                   <div className="usersflex">
                     <UsersIcon className="usericon" />
-                    <input className="inputnumber" type="number" min="1" />
+                    <input
+                      className="inputnumber"
+                      type="number"
+                      min="1"
+                      value={guestsNumber}
+                      onChange={(e) => setGuestsNumber(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div className="actionbt" id="actionbt">
                   <button className="cancelbt" onClick={resetInput}>
                     Cancel
                   </button>
-                  <button className="searchbt">Search</button>
+                  <button className="searchbt" onClick={search}>
+                    Search
+                  </button>
                 </div>
               </div>
             </div>
@@ -144,14 +171,22 @@ export default function Header() {
               <p>Number of Guests</p>
               <div className="usersflex">
                 <UsersIcon className="usericon" />
-                <input className="inputnumber" type="number" min="1" />
+                <input
+                  className="inputnumber"
+                  type="number"
+                  min="1"
+                  value={guestsNumber}
+                  onChange={(e) => setGuestsNumber(e.target.value)}
+                />
               </div>
             </div>
             <div className="actionbt" id="actionbt">
               <button className="cancelbt" onClick={resetInput}>
                 Cancel
               </button>
-              <button className="searchbt">Search</button>
+              <button className="searchbt" onClick={search}>
+                Search
+              </button>
             </div>
           </div>
         </div>

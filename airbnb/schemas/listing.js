@@ -40,8 +40,8 @@ export default {
       ],
     },
     {
-      title: "images",
-      name: "Images",
+      title: "Images",
+      name: "listingImages",
       type: "array",
       of: [{ type: "image" }],
     },
@@ -61,6 +61,12 @@ export default {
       title: "Number of Reviews",
       name: "numberOfReviews",
       description: "How many people have reviewed this place",
+      type: "number",
+      validation: (Rule) => Rule.required().min(1),
+    },
+    {
+      title: "Price per night",
+      name: "price",
       type: "number",
       validation: (Rule) => Rule.required().min(1),
     },

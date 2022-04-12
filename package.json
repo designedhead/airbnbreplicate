@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "^0.1.2",
     "@heroicons/react": "^1.0.6",
     "@sanity/image-url": "^1.0.1",
     "animate.css": "^4.1.1",
@@ -18,7 +19,9 @@
     "next-sanity": "^0.5.2",
     "react": "^18.0.0",
     "react-date-range": "^1.4.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^8.1.0"
   },
   "devDependencies": {
     "eslint": "8.12.0",

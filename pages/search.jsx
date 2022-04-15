@@ -5,7 +5,7 @@ import ListingTile from "../src/components/search/listing";
 import { sanityClient, urlFor } from "../sanity.js";
 import { useRouter } from "next/router";
 import { differenceInDays, format, parseISO } from "date-fns";
-
+import MapList from "../src/components/map";
 
 const Search = (props) => {
   const router = useRouter();
@@ -14,9 +14,10 @@ const Search = (props) => {
   const formattedStartDate = format(new Date(startDate), "dd MMMM yyyy");
   const formattedEndDate = format(new Date(endDate), "dd MMMM yyyy");
   const range = `${formattedStartDate} - ${formattedEndDate}`;
+  const dayCount = differenceInDays(parseISO(endDate), parseISO(startDate));
 
   const totalDays = differenceInDays(parseISO(endDate), parseISO(startDate));
-  console.log("images", props);
+  // console.log(props, "props");
   return (
     <div>
       <div className="blackbg">
@@ -28,7 +29,8 @@ const Search = (props) => {
         <div className="searchsplit">
           <div className="left" id="left">
             <p className="detailstext">
-              {props.listings.length}+ stays in {location} from {range}
+              {props.listings.length}+ stays in {location} from {range} -{" "}
+              {guestsNumber} guests
             </p>
             {props.listings.map((listing) => (
               <ListingTile
@@ -46,7 +48,9 @@ const Search = (props) => {
             ))}
           </div>
           <div className="right" id="right">
-            <p>This is the right green side</p>
+            <div className="lazy">
+              <MapList listings={props.listings}/>
+            </div>
           </div>
         </div>
       </section>
@@ -71,6 +75,7 @@ export const getServerSideProps = async () => {
   rating,
   numberOfReviews,
   price,
+  location,
   }`;
 
   const listings = await sanityClient.fetch(query);

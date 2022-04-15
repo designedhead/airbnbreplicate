@@ -24,7 +24,6 @@ const ListingTile = ({
     if (imageSlideshow !== null) {
       let tmp = [];
       imageSlideshow.map((f) => {
-        console.log("ffff", f.asset?.url);
         if (f.asset?.url !== undefined) {
           tmp = [...tmp, f.asset.url];
         }
@@ -42,7 +41,7 @@ const ListingTile = ({
             urls.map((image, i) => (
               <SwiperSlide className="swiper-slide" key={i}>
                 <Image
-                  classname="image-border"
+                  className="image-border"
                   src={image}
                   layout="fill"
                   objectFit="cover"
@@ -77,7 +76,9 @@ const ListingTile = ({
             <p className="price">
               <strong>£{price}</strong> night
             </p>
-            <p className="total">£{totalDays * price} total</p>
+            <p className="total">
+              £{totalDays === 0 ? 1 * price : totalDays * price} total
+            </p>
           </div>
         </div>
       </div>

@@ -6,7 +6,6 @@ export default function FutureGetaways() {
   const toggleTab = (index) => {
     setToggleState(index);
   };
-  console.log("state", toggleState);
 
   return (
     <section id="futuregetaways">

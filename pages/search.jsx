@@ -17,7 +17,7 @@ const Search = (props) => {
   const dayCount = differenceInDays(parseISO(endDate), parseISO(startDate));
 
   const totalDays = differenceInDays(parseISO(endDate), parseISO(startDate));
-  // console.log(props, "props");
+  console.log(props, "props");
   return (
     <div>
       <div className="blackbg">
@@ -32,6 +32,7 @@ const Search = (props) => {
               {props.listings.length}+ stays in {location} from {range} -{" "}
               {guestsNumber} guests
             </p>
+            {props.listings.length ? "" : <h1>No Results</h1>}
             {props.listings.map((listing) => (
               <ListingTile
                 key={listing._id}
@@ -49,7 +50,7 @@ const Search = (props) => {
           </div>
           <div className="right" id="right">
             <div className="lazy">
-              <MapList listings={props.listings}/>
+              <MapList listings={props.listings} />
             </div>
           </div>
         </div>
@@ -61,9 +62,9 @@ const Search = (props) => {
 
 export default Search;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
   // const query = `*[_type == "listing" && name match "Monteiro"]{
-  const query = `*[_type == "listing"]{
+  const query = `*[_type == "listing" && name match "${context.query.location}"]{
     _id,
     name,
     subtitle,

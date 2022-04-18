@@ -685,6 +685,7 @@
   gap: 20px;
   border-bottom: solid 1px #f1f1f1;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 .tile:first-of-type {
   border-top: solid 1px #f1f1f1;
@@ -837,4 +838,54 @@
 .map_marker:hover {
  transform: scale(1.08);
  background-color: rgb(240, 240, 240);
+}
+
+.popup_info {
+width: 210px;
+padding-top: 8px;
+
+}
+.popup_image {
+height: 140px;
+width: 210px;
+object-fit: cover;
+border-radius: 3px;
+margin-bottom: 2px;
+}
+.popup_ratings_container {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  gap: 2px;
+  margin: 6px 0px;
+  height: 16px;
+
+}
+.popup_title{
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 17px;
+  font-weight: 400;
+}
+.popup_price{
+margin: 6px 0px;
+}
+.popup_bold{
+  font-weight: 800;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+.popup_rating{
+font-size: 15px;
+
+}
+.popup_number{
+  font-size: 15px;
+  color: #757575;
+}
+.popup_icon{
+  color: #d6407f;
+  width: 15px;
+  height: auto;
 }

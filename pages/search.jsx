@@ -6,6 +6,7 @@ import { sanityClient, urlFor } from "../sanity.js";
 import { useRouter } from "next/router";
 import { differenceInDays, format, parseISO } from "date-fns";
 import MapList from "../src/components/map";
+import NoResults from "../src/components/search/noresults";
 
 const Search = (props) => {
   const router = useRouter();
@@ -13,26 +14,26 @@ const Search = (props) => {
 
   const formattedStartDate = format(new Date(startDate), "dd MMMM yyyy");
   const formattedEndDate = format(new Date(endDate), "dd MMMM yyyy");
-  const range = `${formattedStartDate} - ${formattedEndDate}`;
+  const range = `${formattedStartDate} to ${formattedEndDate}`;
   const dayCount = differenceInDays(parseISO(endDate), parseISO(startDate));
 
   const totalDays = differenceInDays(parseISO(endDate), parseISO(startDate));
-  console.log(props, "props");
   return (
     <div>
       <div className="blackbg">
         <Header
           placeholder={`${location} | ${range} | ${guestsNumber} guests`}
+          bar={false}
         />
       </div>
       <section id="search">
         <div className="searchsplit">
-          <div className="left" id="left">
+          <div className={props.listings.length ? "left" : "middle"} id="left">
             <p className="detailstext">
-              {props.listings.length}+ stays in {location} from {range} -{" "}
+              {props.listings.length} stays in {location} from {range} for{" "}
               {guestsNumber} guests
             </p>
-            {props.listings.length ? "" : <h1>No Results</h1>}
+            {props.listings.length ? "" : <NoResults />}
             {props.listings.map((listing) => (
               <ListingTile
                 key={listing._id}
@@ -45,10 +46,12 @@ const Search = (props) => {
                 imageSlideshow={listing?.listingImages}
                 price={listing.price}
                 totalDays={totalDays}
+                slug={listing.slug}
               />
             ))}
           </div>
-          <div className="right" id="right">
+          <div className={props.listings.length ? "right" : "hidden"}>
+            {/* <div className="right"> */}
             <div className="lazy">
               <MapList listings={props.listings} />
             </div>
@@ -77,6 +80,7 @@ export const getServerSideProps = async (context) => {
   numberOfReviews,
   price,
   location,
+  slug,
   }`;
 
   const listings = await sanityClient.fetch(query);

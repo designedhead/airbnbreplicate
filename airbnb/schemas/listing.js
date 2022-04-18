@@ -25,6 +25,15 @@ export default {
       of: [{ type: "block" }],
     },
     {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "name",
+        maxLength: 40,
+      },
+    },
+    {
       name: "tags",
       title: "Tags",
       type: "array",

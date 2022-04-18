@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CardImage from "../../public/img/card.webp";
+import CardImageFull from "../../public/img/card-full.webp";
 
 export default function Card() {
   return (
@@ -12,7 +13,12 @@ export default function Card() {
           <button>Learn more</button>
         </div>
         <div className="image">
-          <Image src={CardImage} layout="responsive" />
+          <div className="image_small">
+            <Image src={CardImage} layout="responsive" />
+          </div>
+          <div className="image_full">
+            <Image src={CardImageFull} layout="responsive" />
+          </div>
         </div>
       </div>
     </section>

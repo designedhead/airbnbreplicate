@@ -13,8 +13,9 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/router";
+import { DateRange } from "react-date-range";
 
-export default function Header({ placeholder }) {
+export default function Header({ placeholder, bar }) {
   const [navbar, setNavbar] = useState(false);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export default function Header({ placeholder }) {
         guestsNumber: guestsNumber,
       },
     });
+    setSearchInput("");
   };
 
   const selectionRange = {
@@ -189,6 +191,56 @@ export default function Header({ placeholder }) {
               </button>
             </div>
           </div>
+        </div>
+      )}
+      {bar === true && (
+        <div className="mobile_search_container">
+          <div className="search__input_mobile" id="bar">
+            <input
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              name="search"
+              id="search"
+              placeholder={placeholder || "Start your search..."}
+              autoComplete="off"
+            />
+            <div className="searchbt">
+              <SearchIcon className="search__input__icon" />
+            </div>
+          </div>
+          {searchInput && (
+            <div className="datepicker_mobile" id="datepicker">
+              <div className="pickerround">
+                <DateRange
+                  ranges={[selectionRange]}
+                  minDate={new Date()}
+                  rangeColors={["#FD5B61"]}
+                  onChange={handleSelect}
+                />
+                <div className="guests">
+                  <p>Number of Guests</p>
+                  <div className="usersflex">
+                    <UsersIcon className="usericon" />
+                    <input
+                      className="inputnumber"
+                      type="number"
+                      min="1"
+                      value={guestsNumber}
+                      onChange={(e) => setGuestsNumber(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="actionbt" id="actionbt">
+                  <button className="cancelbt" onClick={resetInput}>
+                    Cancel
+                  </button>
+                  <button className="searchbt" onClick={search}>
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </header>

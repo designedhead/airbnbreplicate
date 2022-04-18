@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <section>
       <div className="blackbg searchsection">
-        <Header />
+        <Header bar={true} />
         {/* <Search /> */}
         <Ukraine />
       </div>
